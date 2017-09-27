@@ -5,27 +5,93 @@ using UnityEngine;
 public class WorldControls : MonoBehaviour
 {
     public GameObject player;
-    public float spinSpeed = 50f;
+
+    public float currentSpinVelocity    = 0f;
+    public float currentMaxSpinVelocity = 0f;
+    public float normalSpinVelocity     = 75f;
+    public float boostSpinVelocity      = 150f;
+
+    public float currentAcceleration = 0f;
+    public float normalAcceleration = 1f;
+    public float boostAcceleration = 2f;
+    
+    public float drag = 0.5f;
 
 
-    private void Update()
+
+
+
+    private void Start()
     {
-        var playerPosition = player.transform.position;
-        
-
-
-        // Rotate world object around player origin 
-        if(Input.GetAxis("Horizontal") < 0)
-        {
-            //this.transform.RotateAround(transform.position, Vector3.forward, 200f * Time.deltaTime);
-            transform.RotateAround(playerPosition, Vector3.forward, spinSpeed * Time.deltaTime);
-        }
-
-        if (Input.GetAxis("Horizontal") > 0)
-        {
-            //this.transform.RotateAround(transform.position, Vector3.back, 200f * Time.deltaTime);
-            transform.RotateAround(playerPosition, Vector3.back, spinSpeed * Time.deltaTime);
-        }
+        currentAcceleration = normalAcceleration;
+        currentMaxSpinVelocity = normalSpinVelocity;
     }
 
+
+    private void FixedUpdate()
+    {
+        AddBoost();
+        SpinRoom();
+    }
+
+
+
+
+    private void SpinRoom()
+    {
+        var playerPosition = player.transform.position;
+
+        if (Input.GetAxis("Horizontal") < 0)
+        {
+            currentSpinVelocity += currentAcceleration;
+
+            if (currentSpinVelocity >= currentMaxSpinVelocity)
+            {
+                currentSpinVelocity = currentMaxSpinVelocity;
+            }
+        }
+        else if (Input.GetAxis("Horizontal") > 0)
+        {
+            currentSpinVelocity -= currentAcceleration;
+
+            if (currentSpinVelocity <= -currentMaxSpinVelocity)
+            {
+                currentSpinVelocity = -currentMaxSpinVelocity;
+            }
+        }
+        else
+        {
+            if (currentSpinVelocity < 0)
+            {
+                currentSpinVelocity += drag;
+
+                if (currentSpinVelocity > 0)
+                    currentSpinVelocity = 0;
+            }
+            else if (currentSpinVelocity > 0)
+            {
+                currentSpinVelocity -= drag;
+
+                if (currentSpinVelocity < 0)
+                    currentSpinVelocity = 0;
+            }
+        }
+        transform.RotateAround(playerPosition, Vector3.forward, currentSpinVelocity * Time.deltaTime);
+    }
+
+
+
+    private void AddBoost()
+    {
+        if (Input.GetAxis("Triggers") < 0)
+        {
+            currentAcceleration = boostAcceleration;
+            currentMaxSpinVelocity = boostSpinVelocity;
+        }
+        else
+        {
+            currentAcceleration = normalAcceleration;
+            currentMaxSpinVelocity = normalSpinVelocity;
+        }
+    }
 }

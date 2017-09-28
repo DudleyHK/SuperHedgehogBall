@@ -10,6 +10,6 @@ public class LevelManager : MonoBehaviour
 {
     public static void ResetCurrentScene()
     {
-        SceneManager.LoadScene("RotateWorld");
+        SceneManager.LoadScene("SinglePlatform");
     }
 }

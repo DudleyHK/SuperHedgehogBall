@@ -8,9 +8,12 @@ public class HUD : MonoBehaviour {
     public Text score;
     public Text timer;
     public Text speed;
-    float elapsed;
+    public GameObject[] livesSprites;
     float secondsPassed;
-    
+    int secondsTens = 0;
+    int MinutesUnit = 0;
+    int MinutesTens = 0;
+
     // Use this for initialization
     void Start()
     {
@@ -25,13 +28,28 @@ public class HUD : MonoBehaviour {
         UpdateSpeed();
         UpdateTime();
         UpdateScore();
+        UpdateLives();
 	}
 
     void UpdateTime()
     {
-        elapsed += (Time.deltaTime);
         secondsPassed += (Time.deltaTime);
-        //displayTime(); //Displays the time
+        if (secondsPassed > 10)
+        {
+            secondsPassed = 0;
+            secondsTens += 1;
+            if(secondsTens > 5)
+            {
+                MinutesUnit += 1;
+                secondsTens = 0;
+            }
+            if(MinutesUnit > 9)
+            {
+                MinutesUnit = 0;
+                MinutesTens += 1;
+            }
+        }
+        timer.text = MinutesTens.ToString() + MinutesUnit.ToString() + ":" + secondsTens.ToString() + (int) secondsPassed;
     }
 
     void UpdateScore()
@@ -42,8 +60,19 @@ public class HUD : MonoBehaviour {
         
     }
 
+    void UpdateLives()
+    {
+      //  int lives = 300;
+      //  if(lives < 3)
+      //  {
+       //     if (livesSprites[lives].gameObject)
+       //         Destroy(livesSprites[lives].gameObject);
+       // }
+    }
+
     void UpdateSpeed()
     {
+        //REPLACE WITH PLAYER VELOCITY
         int speedos = 30;
         speed.text = speedos.ToString() + " mph";
     }

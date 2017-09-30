@@ -8,7 +8,7 @@ public class PhysicsContraints : MonoBehaviour {
     public  bool        isBoosting;
     public  Rigidbody2D rigidBody2D;
     private float       boostTimer;
-    private float       defaultBoostTime = 0;
+    private const float       defaultBoostTime = 0;
 
 	// Use this for initialization
 	void Start ()

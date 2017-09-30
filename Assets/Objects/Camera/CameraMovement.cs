@@ -13,7 +13,7 @@ public class CameraMovement : MonoBehaviour
 
     }
 
-    private void Update()
+    private void FixedUpdate()
     {
         //Legacy Camera Movement
         //var playerPos = player.transform.position;

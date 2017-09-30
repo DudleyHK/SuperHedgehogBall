@@ -6,6 +6,7 @@ public class PlayerData : MonoBehaviour {
 
     int lives = 3;
     int score = 0;
+    int collectedBananas = 0;
     float speed = 0;
 
     private GameObject player;
@@ -30,6 +31,11 @@ public class PlayerData : MonoBehaviour {
         return lives;
     }
 
+    public int getBananas()
+    {
+        return collectedBananas;
+    }
+
     public int getScore()
     {
         return score;
@@ -48,5 +54,10 @@ public class PlayerData : MonoBehaviour {
     public void modifyScore(int amount)
     {
         score += amount;
+    }
+
+    public void modifyBananas(int amount)
+    {
+        collectedBananas += amount;
     }
 }

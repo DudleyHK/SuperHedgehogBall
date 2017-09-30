@@ -5,13 +5,17 @@ using UnityEngine;
 public class CameraMovement : MonoBehaviour
 {
     public GameObject player;
-    public float acceleration; //float between 0 and 1
+    public float acceleration = 0.1f; //float between 0 and 1
     private Vector3 velocity;
+
+
 
     private void Start()
     {
 
     }
+
+
 
     private void FixedUpdate()
     {

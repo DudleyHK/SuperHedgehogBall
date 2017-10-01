@@ -1,0 +1,8 @@
+//// WEBSITE LINKS INCASE REFERENCES ARE NEEDED \\\\
+
+
+AUDIO:
+- Menu Music: https://www.youtube.com/watch?v=FFuYXKU6Y9I
+- Game Music: https://www.youtube.com/watch?v=KJrFGr8cJiQ
+- SFX: Made with http://www.superflashbros.net/as3sfxr/
+- Win Level: https://www.youtube.com/watch?v=nzjtkaLCn60

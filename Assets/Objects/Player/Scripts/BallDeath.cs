@@ -16,7 +16,7 @@ public class BallDeath : MonoBehaviour
     {
         if(other.gameObject == killBox)
         {
-            LevelManager.ResetCurrentScene();
+            LevelManager.ResetScene();
             playerData.modifyLives(-1);
         }
     }

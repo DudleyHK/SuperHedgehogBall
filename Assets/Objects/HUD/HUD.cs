@@ -10,10 +10,9 @@ public class HUD : MonoBehaviour {
     public Text timer;
     public Text speed;
     public GameObject[] livesSprites;
-    float secondsPassed;
-    int secondsTens = 0;
-    int MinutesUnit = 0;
-    int MinutesTens = 0;
+    float elapsed = 0;
+    float time = 0;
+    float miliseconds;
 
     // Use this for initialization
     void Start()
@@ -28,35 +27,31 @@ public class HUD : MonoBehaviour {
 	void Update ()
     {
         UpdateSpeed();
-        UpdateTime();
+        UpdateTimer();
         UpdateScore();
         UpdateLives();
 	}
 
-    void UpdateTime()
+    void UpdateTimer()
     {
-        secondsPassed += (Time.deltaTime);
-        if (secondsPassed > 10)
+        //elapsed = Time.deltaTime;
+        time += Time.deltaTime;
+        elapsed += Time.deltaTime;
+        if(elapsed > 1)
         {
-            secondsPassed = 0;
-            secondsTens += 1;
-            if(secondsTens > 5)
-            {
-                MinutesUnit += 1;
-                secondsTens = 0;
-            }
-            if(MinutesUnit > 9)
-            {
-                MinutesUnit = 0;
-                MinutesTens += 1;
-            }
+            elapsed = 0;
+            miliseconds = 0;
         }
-        timer.text = MinutesTens.ToString() + MinutesUnit.ToString() + ":" + secondsTens.ToString() + (int) secondsPassed;
+        
+        miliseconds += Time.deltaTime * 100;
+        string minutes = Mathf.Floor(time / 60).ToString("00");
+        string seconds = Mathf.Floor(time % 60).ToString("00");
+        timer.text = string.Format("{0}:{1}:{2}", minutes, seconds, miliseconds.ToString("00"));
     }
 
     void UpdateScore()
     {
-        score.text = playerData.getScore().ToString();
+        score.text = "" + playerData.getScore().ToString("000");
         
     }
 

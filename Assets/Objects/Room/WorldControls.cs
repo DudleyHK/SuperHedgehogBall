@@ -47,6 +47,11 @@ public class WorldControls : MonoBehaviour
 
         if (Input.GetAxis("Horizontal") < 0)
         {
+            if(currentSpinVelocity < 0)
+            {
+                currentSpinVelocity = 0;
+            }
+
             currentSpinVelocity += currentAcceleration;
 
             if (currentSpinVelocity >= currentMaxSpinVelocity)
@@ -56,6 +61,11 @@ public class WorldControls : MonoBehaviour
         }
         else if (Input.GetAxis("Horizontal") > 0)
         {
+            if(currentSpinVelocity > 0)
+            {
+                currentSpinVelocity = 0;
+            }
+
             currentSpinVelocity -= currentAcceleration;
 
             if (currentSpinVelocity <= -currentMaxSpinVelocity)

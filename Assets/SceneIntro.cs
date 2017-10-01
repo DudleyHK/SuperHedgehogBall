@@ -18,11 +18,9 @@ public class SceneIntro : MonoBehaviour
 
     private void Start()
     {
-        if (skipIntro)
-        {
-            texture.color = Color.clear;
-            return;
-        }
+        if (skipIntro) return;
+
+        texture.color = Color.black;
         Camera.main.orthographicSize = cameraStartSize;
         texture.pixelInset = new Rect(0f, 0f, Screen.width, Screen.height);
         StartCoroutine(FadeToClear());

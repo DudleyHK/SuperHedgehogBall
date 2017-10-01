@@ -10,13 +10,9 @@ public class HUD : MonoBehaviour {
     public Text timer;
     public Text speed;
     public GameObject[] livesSprites;
-    float secondsPassed = 0;
-    int secondsTens = 0;
-    int MinutesUnit = 0;
-    int MinutesTens = 0;
     float elapsed = 0;
-    float miliseconds;
     float time = 0;
+    float miliseconds;
 
     // Use this for initialization
     void Start()

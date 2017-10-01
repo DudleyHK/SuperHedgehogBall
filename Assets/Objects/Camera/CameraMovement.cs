@@ -10,10 +10,14 @@ public class CameraMovement : MonoBehaviour
 
 
 
-    private void Start()
-    {
 
+
+    private void Awake()
+    {
+        var playerPos = new Vector3(player.transform.position.x, player.transform.position.y, transform.position.z);
+        transform.position = playerPos;
     }
+
 
 
 

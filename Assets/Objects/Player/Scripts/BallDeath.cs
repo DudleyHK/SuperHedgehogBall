@@ -5,7 +5,14 @@ using UnityEngine;
 public class BallDeath : MonoBehaviour
 {
     public GameObject killBox;
-    PlayerData playerData;
+    public AudioClip die;
+
+
+    private PlayerData playerData;
+    private AudioSource source { get { return GetComponent<AudioSource>(); } }
+
+
+
 
     private void Start()
     {
@@ -16,8 +23,26 @@ public class BallDeath : MonoBehaviour
     {
         if(other.gameObject == killBox)
         {
-            LevelManager.ResetScene();
+            if (!source.isPlaying)
+            {
+                source.clip = die;
+                source.PlayOneShot(die);
+            }
+
+            print("leaving kill box");
+            StartCoroutine(WaitForSoundBeforeSceneChange());
             playerData.modifyLives(-1);
         }
+    }
+
+
+    private IEnumerator WaitForSoundBeforeSceneChange()
+    {
+        while (source.isPlaying)
+        {
+            yield return false;
+        }
+        LevelManager.ResetScene();
+        yield return true;
     }
 }

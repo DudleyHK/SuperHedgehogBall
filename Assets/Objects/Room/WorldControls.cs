@@ -16,7 +16,11 @@ public class WorldControls : MonoBehaviour
     public float boostAcceleration = 2f;
     
     public float drag = 0.5f;
+    public bool boostLock = false;
 
+    public AudioClip mapBoost;
+
+    private AudioSource source { get { return this.GetComponent<AudioSource>(); } }
 
 
 
@@ -85,13 +89,39 @@ public class WorldControls : MonoBehaviour
     {
         if (Input.GetAxis("Triggers") < 0)
         {
-            currentAcceleration = boostAcceleration;
-            currentMaxSpinVelocity = boostSpinVelocity;
+            if (!boostLock)
+            {
+                currentAcceleration = boostAcceleration;
+                currentMaxSpinVelocity = boostSpinVelocity;
+
+                if (!source.isPlaying)
+                {
+                    source.clip = mapBoost;
+                    source.PlayOneShot(mapBoost);
+                }
+
+                boostLock = true;
+                StartCoroutine(SetBackToNormal());
+            }
         }
         else
         {
+            boostLock = false;
             currentAcceleration = normalAcceleration;
             currentMaxSpinVelocity = normalSpinVelocity;
         }
+    }
+
+
+    private IEnumerator SetBackToNormal()
+    {
+        while(source.isPlaying)
+        {
+            yield return false;
+        }
+
+        currentAcceleration = normalAcceleration;
+        currentMaxSpinVelocity = normalSpinVelocity;
+        yield return true;
     }
 }

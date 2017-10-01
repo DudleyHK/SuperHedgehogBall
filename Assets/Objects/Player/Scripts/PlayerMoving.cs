@@ -8,6 +8,8 @@ public class PlayerMoving : MonoBehaviour
     public Rigidbody2D playerRigidbody;
     public float timer = 0f;
 
+    public AudioSource source;
+
 
     // Update is called once per frame
     private void Update ()
@@ -32,7 +34,18 @@ public class PlayerMoving : MonoBehaviour
             {
                 playerAnim.SetBool("Blink", false);
             }
-            Debug.Log("Normalised Blink Time: " + stateInfo.normalizedTime);
+        }
+
+        if (stateInfo.IsName("Rolling"))
+        {
+            if(!source.isPlaying)
+            {
+                source.Play();
+            }
+        }
+        else
+        {
+            source.Stop();
         }
         playerAnim.SetFloat("Speed", playerRigidbody.velocity.magnitude);
 	}

@@ -2,11 +2,13 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PortalScript : MonoBehaviour {
+public class PortalScript : MonoBehaviour
+{
 
     public GameObject player;
     public GameObject direction;
     public GameObject spawn;
+    public PortalScript twin;
 
     private float speed = 1000.0f;
 
@@ -19,11 +21,15 @@ public class PortalScript : MonoBehaviour {
     private PortalScript script;
 
     private Rigidbody2D rb;
+    private AudioSource source { get { return this.GetComponent<AudioSource>(); } }
+
 
     // Use this for initialization
-    void Start () {
+    void Start ()
+    {
         sw1tch = true;
         rb = player.GetComponent<Rigidbody2D>();
+
     }
 	
 	// Update is called once per frame
@@ -49,7 +55,11 @@ public class PortalScript : MonoBehaviour {
 
     void OnTriggerEnter2D(Collider2D other)
     {
-        player.transform.position = spawn.transform.position;
-        rb.AddForce(direction.transform.up * speed);
+        player.transform.position = twin.spawn.transform.position;
+        rb.AddForce(twin.direction.transform.up * speed);
+
+        // Play Portal Audio
+        if (!source.isPlaying)
+            source.Play();
     }
 }

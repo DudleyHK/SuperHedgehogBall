@@ -12,7 +12,7 @@ public class SceneIntro : MonoBehaviour
     public float cameraEndSize = 3f;
 
 
-    public bool gameBegin = false;
+    public static bool gameBegin = false;
     public bool skipIntro = false;
 
 
@@ -25,6 +25,8 @@ public class SceneIntro : MonoBehaviour
         texture.pixelInset = new Rect(0f, 0f, Screen.width, Screen.height);
         StartCoroutine(FadeToClear());
         StartCoroutine(ShowMap());
+
+		print ("End of intro ");
     }
 
 
@@ -43,12 +45,16 @@ public class SceneIntro : MonoBehaviour
 
     private IEnumerator ShowMap()
     {
-        while (Camera.main.orthographicSize >= cameraEndSize)
+		if (!gameBegin) yield return true;
+		while (Camera.main.orthographicSize >= cameraEndSize)
         {
-            Camera.main.orthographicSize = Mathf.Lerp(Camera.main.orthographicSize, cameraEndSize, zoomSpeed * Time.deltaTime);
+			var size = Camera.main.orthographicSize;
+			size -= (zoomSpeed * Time.deltaTime);
+			Camera.main.orthographicSize = size;
             yield return false;
         }
         gameBegin = true;
+		print ("gamebegin: " + gameBegin);
         yield return true;
     }
 }

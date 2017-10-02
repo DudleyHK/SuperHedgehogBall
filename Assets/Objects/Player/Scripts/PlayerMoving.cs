@@ -38,14 +38,15 @@ public class PlayerMoving : MonoBehaviour
 
         if (stateInfo.IsName("Rolling"))
         {
-            if(!source.isPlaying)
-            {
-                source.Play();
-            }
+			// Rolliung Sound.
+            //if(!source.isPlaying)
+            //{
+            //    source.Play();
+            //}
         }
         else
         {
-            source.Stop();
+            //source.Stop();
         }
         playerAnim.SetFloat("Speed", playerRigidbody.velocity.magnitude);
 	}

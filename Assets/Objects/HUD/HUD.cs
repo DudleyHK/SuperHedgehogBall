@@ -51,8 +51,8 @@ public class HUD : MonoBehaviour {
 
     void UpdateScore()
     {
-        score.text = "" + playerData.getScore().ToString("000");
-        
+        score.text = "" + PlayerData.Score.ToString();
+
     }
 
     void UpdateLives()

@@ -2,10 +2,11 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerData : MonoBehaviour {
+public class PlayerData : MonoBehaviour
+{
 
     int lives = 3;
-    int score = 0;
+    private static int score;
     int collectedBananas = 0;
     float speed = 0;
 
@@ -36,9 +37,12 @@ public class PlayerData : MonoBehaviour {
         return collectedBananas;
     }
 
-    public int getScore()
+    public static int Score
     {
-        return score;
+        get
+        {
+            return score;
+        }
     }
 
     public float getSpeed()
@@ -58,6 +62,13 @@ public class PlayerData : MonoBehaviour {
 
     public void modifyBananas(int amount)
     {
-        collectedBananas += amount;
+        score += amount;
+        if (score >= 100)
+        {
+            if (getLives() < 3)
+            {
+                modifyLives(1);
+            }
+        }
     }
 }

@@ -10,11 +10,10 @@ public class PlayerMoving : MonoBehaviour
 
     public AudioSource source;
 
-
     // Update is called once per frame
-    private void Update ()
+    private void Update()
     {
-       AnimatorStateInfo stateInfo = playerAnim.GetCurrentAnimatorStateInfo(0);
+        AnimatorStateInfo stateInfo = playerAnim.GetCurrentAnimatorStateInfo(0);
 
         if (stateInfo.IsName("Idle"))
         {
@@ -30,7 +29,7 @@ public class PlayerMoving : MonoBehaviour
         }
         else if (stateInfo.IsName("Blink"))
         {
-            if(stateInfo.normalizedTime >= 2f)
+            if (stateInfo.normalizedTime >= 2f)
             {
                 playerAnim.SetBool("Blink", false);
             }
@@ -38,7 +37,7 @@ public class PlayerMoving : MonoBehaviour
 
         if (stateInfo.IsName("Rolling"))
         {
-            if(!source.isPlaying)
+            if (!source.isPlaying)
             {
                 source.Play();
             }
@@ -48,10 +47,8 @@ public class PlayerMoving : MonoBehaviour
             source.Stop();
         }
         playerAnim.SetFloat("Speed", playerRigidbody.velocity.magnitude);
-	}
+    }
 }
-
-
 
 
 

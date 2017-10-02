@@ -57,10 +57,10 @@ public class HUD : MonoBehaviour {
 
     void UpdateLives()
     {
-        if( playerData.getLives() < 3)
+        if( PlayerData.Lives < 3)
         {
-            if (livesSprites[playerData.getLives()].gameObject)
-                Destroy(livesSprites[playerData.getLives()].gameObject);
+            if (livesSprites[PlayerData.Lives].gameObject)
+                Destroy(livesSprites[PlayerData.Lives].gameObject);
         }
     }
 

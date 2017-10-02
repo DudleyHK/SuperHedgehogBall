@@ -5,7 +5,8 @@ using UnityEngine;
 public class PlayerData : MonoBehaviour
 {
 
-    int lives = 3;
+    //int lives = 1;
+    private static int lives = 3;
     private static int score;
     int collectedBananas = 0;
     float speed = 0;
@@ -24,12 +25,27 @@ public class PlayerData : MonoBehaviour
         /**
           * Calculation of speed from velocity goes here
           **/
+        if (score >= 100)
+        {
+            if (Lives < 3)
+            {
+                modifyLives(1);
+                score -= 100;
+            }
+        }
+        Debug.Log(lives);
         speed = rigidBody.velocity.magnitude;
     }
-
-    public int getLives()
+    //public int getLives()
+    //{
+    //    return lives;
+    //}
+    public static int Lives
     {
-        return lives;
+        get
+        {
+            return lives;
+        }
     }
 
     public int getBananas()
@@ -63,12 +79,5 @@ public class PlayerData : MonoBehaviour
     public void modifyBananas(int amount)
     {
         score += amount;
-        if (score >= 100)
-        {
-            if (getLives() < 3)
-            {
-                modifyLives(1);
-            }
-        }
     }
 }

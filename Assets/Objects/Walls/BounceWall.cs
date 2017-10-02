@@ -2,19 +2,19 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class BounceScript : MonoBehaviour {
+public class BounceWall : MonoBehaviour {
 
 	private AudioSource audioSource;
 	private float timer = 0f;
 	private bool big = false;
-	public float scale = 5f;
+	public float scale = 0.5f;
+	public float bounceMagnitude = 2.0f;
 	private  Rigidbody2D rigidBody2D;
-	public float bounceMagnitude = 3.0f;
 
 	void Start()
 	{
-		audioSource = GetComponent<AudioSource>();
 		rigidBody2D = GameObject.Find("Player").GetComponent<Rigidbody2D>();
+		audioSource = GetComponent<AudioSource>();
 	}
 
 	void OnCollisionEnter2D(Collision2D col)
@@ -22,8 +22,7 @@ public class BounceScript : MonoBehaviour {
 		audioSource.Play();
 		if (!big) 
 		{
-			transform.localScale += new Vector3 (scale, scale, scale);
-			//rigidBody2D = col.gameObject.GetComponent<Rigidbody2D>();
+			transform.localScale += new Vector3 (0, scale, 0);
 			big = true;
 		}
 	}
@@ -43,7 +42,7 @@ public class BounceScript : MonoBehaviour {
 			else
 			{
 				timer = 0f;
-				transform.localScale -= new Vector3 (scale, scale, scale);
+				transform.localScale -= new Vector3 (0, scale, 0);
 				big = false;
 			}
 		}

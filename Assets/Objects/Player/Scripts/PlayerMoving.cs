@@ -10,8 +10,38 @@ public class PlayerMoving : MonoBehaviour
 
     public AudioSource source;
 
+
+
+
     // Update is called once per frame
     private void Update()
+    {
+        PlayerData.Speed = playerRigidbody.velocity.magnitude;
+        AnimationUpdate();
+        CheckBananaScore();
+    }
+
+    private void OnTriggerEnter2D(Collider2D other)
+    {
+        if (other.gameObject.name == "Banana")
+        {
+            PlayerData.Score += 10;
+            PlayerData.Bananas += 10;
+            other.gameObject.GetComponent<BananaCollectable>().DestroyBanana();
+        }
+    }
+
+
+    private void CheckBananaScore()
+    {
+        if (PlayerData.Bananas >= 100)
+        {
+            PlayerData.Lives++;
+            PlayerData.Bananas -= 100;
+        }
+    }
+
+    private void AnimationUpdate()
     {
         AnimatorStateInfo stateInfo = playerAnim.GetCurrentAnimatorStateInfo(0);
 
@@ -48,25 +78,6 @@ public class PlayerMoving : MonoBehaviour
         }
         playerAnim.SetFloat("Speed", playerRigidbody.velocity.magnitude);
     }
+
 }
 
-
-
- // AnimatorStateInfo stateInfo = playerAnim.GetCurrentAnimatorStateInfo(0);
-// if (!paused)
-            // {
-                // currentWaitTime = Random.Range(MIN_WAIT_TIME, MAX_WAIT_TIME);
-                // paused = true;
-            // }
-            // else
-            // {
-                // if (timer <= currentWaitTime)
-                // {
-                    // timer += Time.deltaTime;
-                // }
-                // else
-                // {
-                    // timer = 0f;
-                    // paused = false;
-                // }
-            // }

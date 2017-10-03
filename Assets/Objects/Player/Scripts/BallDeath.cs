@@ -28,7 +28,7 @@ public class BallDeath : MonoBehaviour
 
             print("leaving kill box");
             StartCoroutine(WaitForSoundBeforeSceneChange());
-            if(PlayerData.getLives > 0)
+            if(PlayerData.Lives > 0)
             {
                 playerData.modifyLives(-1);
             }

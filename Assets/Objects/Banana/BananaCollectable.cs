@@ -5,18 +5,12 @@ using UnityEngine;
 public class BananaCollectable : MonoBehaviour
 {
     private AudioSource source { get { return this.GetComponent<AudioSource>(); } }
-    public PlayerData data;
+    private PlayerData data { get { return GetComponentInChildren<PlayerData>(); } }
 
-
-    public void OnTriggerEnter2D(Collider2D other)
-    { 
-        if(other.gameObject.name == "Player")
-        {
-            CollectedAudio();
-            data.modifyScore(10);
-            data.modifyBananas(10);
-            StartCoroutine(DestroyOnceEffectsHaveFinished());
-        }
+    public void DestroyBanana()
+    {
+        CollectedAudio();
+        StartCoroutine(DestroyOnceEffectsHaveFinished());
     }
 
     private void CollectedAudio()

@@ -27,6 +27,7 @@ public class WorldControls : MonoBehaviour
 
     private void Start()
     {
+        player = GameObject.Find("Player");
         currentAcceleration = normalAcceleration;
         currentMaxSpinVelocity = normalSpinVelocity;
     }

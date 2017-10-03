@@ -13,7 +13,8 @@ public class BananaCollectable : MonoBehaviour
         if(other.gameObject.name == "Player")
         {
             CollectedAudio();
-            data.modifyBananas(25);
+            data.modifyScore(10);
+            data.modifyBananas(10);
             StartCoroutine(DestroyOnceEffectsHaveFinished());
         }
     }

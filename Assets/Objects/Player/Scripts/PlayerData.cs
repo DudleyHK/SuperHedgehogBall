@@ -8,7 +8,7 @@ public class PlayerData : MonoBehaviour
     //int lives = 1;
     private static int lives = 3;
     private static int score;
-    int collectedBananas = 0;
+    private static int collectedBananas;
     float speed = 0;
 
     private GameObject player;
@@ -25,21 +25,15 @@ public class PlayerData : MonoBehaviour
         /**
           * Calculation of speed from velocity goes here
           **/
-        if (score >= 100)
+        if (collectedBananas >= 100)
         {
-            if (Lives < 3)
-            {
-                modifyLives(1);
-                score -= 100;
-            }
+            modifyLives(1);
+            collectedBananas -= 100;
         }
-        Debug.Log(lives);
+        Debug.Log(collectedBananas);
         speed = rigidBody.velocity.magnitude;
     }
-    //public int getLives()
-    //{
-    //    return lives;
-    //}
+
     public static int Lives
     {
         get
@@ -48,9 +42,12 @@ public class PlayerData : MonoBehaviour
         }
     }
 
-    public int getBananas()
+    public static int Banana
     {
-        return collectedBananas;
+        get
+        {
+            return collectedBananas;
+        }
     }
 
     public static int Score
@@ -78,6 +75,6 @@ public class PlayerData : MonoBehaviour
 
     public void modifyBananas(int amount)
     {
-        score += amount;
+        collectedBananas += amount;
     }
 }

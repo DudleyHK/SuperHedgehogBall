@@ -5,6 +5,7 @@ using UnityEngine;
 public class PlayerFalling : MonoBehaviour
 {
     public bool grounded = false;
+    public float threshold = 5f;
     public AudioClip hitFloor;
     private CameraShake camShake { get { return Camera.main.GetComponent<CameraShake>(); } }
 
@@ -18,8 +19,10 @@ public class PlayerFalling : MonoBehaviour
         {
             if (!grounded)
             {
+                if(PlayerData.Speed > threshold)
+                    camShake.ShakeCamera(0.5f, .1f);
+
                 grounded = true;
-                camShake.ShakeCamera(0.5f, .1f);
                 HitFloor();
             }
         }

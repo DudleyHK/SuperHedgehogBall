@@ -6,6 +6,7 @@ using UnityEngine;
 public class GameOverHUD : MonoBehaviour {
 
     public Text finalScore;
+    public Text highScore;
 
 	// Use this for initialization
 	void Start () {
@@ -19,6 +20,7 @@ public class GameOverHUD : MonoBehaviour {
 
     void setScore()
     {
-        finalScore.text = "" + PlayerData.Score.ToString();
+        finalScore.text = "You collected " + PlayerData.Score.ToString() + " bananas";
+        highScore.text = "Your highscore is " + PlayerData.HighScore.ToString() + " bananas";
     }
 }

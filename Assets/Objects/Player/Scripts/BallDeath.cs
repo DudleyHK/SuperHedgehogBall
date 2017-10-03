@@ -7,13 +7,10 @@ public class BallDeath : MonoBehaviour
     public GameObject killBox;
     public AudioClip die;
 
-
-    private PlayerData playerData;
     private AudioSource source { get { return GetComponent<AudioSource>(); } }
 
     private void Start()
     {
-        playerData = GameObject.Find("Player").GetComponent<PlayerData>();
     }
 
     private void OnTriggerExit2D(Collider2D other)
@@ -30,7 +27,7 @@ public class BallDeath : MonoBehaviour
             StartCoroutine(WaitForSoundBeforeSceneChange());
             if(PlayerData.Lives > 0)
             {
-                playerData.modifyLives(-1);
+                PlayerData.Lives = -1;
             }
             else
             {

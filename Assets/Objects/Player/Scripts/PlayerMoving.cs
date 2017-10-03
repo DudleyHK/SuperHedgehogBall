@@ -38,12 +38,8 @@ public class PlayerMoving : MonoBehaviour
         if (PlayerData.BananaCount >= 10)
         {
             PlayerData.Lives++;
-<<<<<<< HEAD
-            PlayerData.BananaCount -= 10;
-=======
-            PlayerData.Bananas -= 100;
+            PlayerData.BananaCount -= 100;
             StartCoroutine(addLife());
->>>>>>> LifeAdded
         }
     }
 

@@ -7,8 +7,9 @@ public class PlayerData : MonoBehaviour
 
     //int lives = 1;
     private static int lives = 3;
-    private static int score;
-    private static int collectedBananas;
+    private static int score = 0;
+    private static int highscore = 0;
+    private static int bananaCount = 0;
     private static float speed = 0;
 
 
@@ -25,15 +26,27 @@ public class PlayerData : MonoBehaviour
         }
     }
 
-    public static int Bananas
+    public static int HighScore
     {
         get
         {
-            return collectedBananas;
+            return highscore;
         }
         set
         {
-            collectedBananas = value;
+            highscore = value;
+        }
+    }
+
+    public static int BananaCount
+    {
+        get
+        {
+            return bananaCount;
+        }
+        set
+        {
+            bananaCount = value;
         }
     }
 
@@ -59,20 +72,5 @@ public class PlayerData : MonoBehaviour
         {
             speed = value;
         }
-    }
-    
-    public void modifyLives(int amount)
-    {
-        lives += amount;
-    }
-
-    public void modifyScore(int amount)
-    {
-        score += amount;
-    }
-
-    public void modifyBananas(int amount)
-    {
-        collectedBananas += amount;
     }
 }

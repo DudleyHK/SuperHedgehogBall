@@ -9,6 +9,7 @@ public class PlayerMoving : MonoBehaviour
     public float timer = 0f;
 
     public AudioSource source;
+    public AudioClip lifeGain;
 
     public SpriteRenderer lifeSprite;
     // Update is called once per frame
@@ -16,7 +17,6 @@ public class PlayerMoving : MonoBehaviour
     {
         PlayerData.Speed = playerRigidbody.velocity.magnitude;
         AnimationUpdate();
-        CheckBananaScore();
     }
 
     private void OnTriggerEnter2D(Collider2D other)
@@ -28,19 +28,31 @@ public class PlayerMoving : MonoBehaviour
             if (PlayerData.Score > PlayerData.HighScore)
                 PlayerData.HighScore = PlayerData.Score;
             other.gameObject.GetComponent<BananaCollectable>().DestroyBanana();
-            //StartCoroutine(addLife());
+            CheckBananaScore();
         }
     }
 
 
     private void CheckBananaScore()
     {
-        if (PlayerData.BananaCount >= 10)
+        if (PlayerData.BananaCount % 10 == 0)
         {
             PlayerData.Lives++;
-            PlayerData.BananaCount -= 100;
-            StartCoroutine(addLife());
+            PlayerData.BananaCount -= 10;
+            NewLife();
         }
+    }
+
+    private void NewLife()
+    {
+        StartCoroutine(addLife());
+        if (!source.isPlaying)
+        {
+            source.clip = lifeGain;
+            source.PlayOneShot(lifeGain);
+
+        }
+        Debug.Log("Smash Floor");
     }
 
     private void AnimationUpdate()

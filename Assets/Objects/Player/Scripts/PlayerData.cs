@@ -6,7 +6,7 @@ public class PlayerData : MonoBehaviour
 {
 
     //int lives = 1;
-    private static int lives = 3;
+    public static int lives = 3;
     private static int score;
     private static int collectedBananas;
     float speed = 0;
@@ -34,7 +34,7 @@ public class PlayerData : MonoBehaviour
         speed = rigidBody.velocity.magnitude;
     }
 
-    public static int Lives
+    public static int getLives
     {
         get
         {
@@ -42,7 +42,7 @@ public class PlayerData : MonoBehaviour
         }
     }
 
-    public static int Banana
+    public static int getBananas
     {
         get
         {
@@ -50,7 +50,7 @@ public class PlayerData : MonoBehaviour
         }
     }
 
-    public static int Score
+    public static int getScore
     {
         get
         {

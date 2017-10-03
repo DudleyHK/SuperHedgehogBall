@@ -10,7 +10,6 @@ public class HUD : MonoBehaviour {
     public Text timer;
     public Text speed;
     public Text lives;
-    public GameObject[] livesSprites;
     float elapsed = 0;
     float time = 0;
     float miliseconds;
@@ -53,13 +52,13 @@ public class HUD : MonoBehaviour {
 
     void UpdateScore()
     {
-        score.text = "" + PlayerData.Score.ToString();
+        score.text = "" + PlayerData.getScore.ToString();
 
     }
 
     void UpdateLives()
     {
-        lives.text = "X: " + PlayerData.Lives.ToString();
+        lives.text = "x " + PlayerData.getLives.ToString("00");
         //if( PlayerData.Lives < 3)
         //{
         //    if (livesSprites[PlayerData.Lives].gameObject)

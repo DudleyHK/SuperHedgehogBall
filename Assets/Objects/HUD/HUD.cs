@@ -67,4 +67,9 @@ public class HUD : MonoBehaviour
     {
         speed.text = (int) PlayerData.Speed + " mph";
     }
+
+    public float getElapsed()
+    {
+        return elapsed;
+    }
 }

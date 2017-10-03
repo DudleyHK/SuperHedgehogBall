@@ -53,17 +53,11 @@ public class HUD : MonoBehaviour {
     void UpdateScore()
     {
         score.text = "" + PlayerData.getScore.ToString();
-
     }
 
     void UpdateLives()
     {
         lives.text = "x " + PlayerData.getLives.ToString("00");
-        //if( PlayerData.Lives < 3)
-        //{
-        //    if (livesSprites[PlayerData.Lives].gameObject)
-        //        Destroy(livesSprites[PlayerData.Lives].gameObject);
-        //}
     }
 
     void UpdateSpeed()

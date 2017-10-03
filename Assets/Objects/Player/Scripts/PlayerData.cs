@@ -2,11 +2,13 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerData : MonoBehaviour {
+public class PlayerData : MonoBehaviour
+{
 
-    int lives = 3;
-    int score = 0;
-    int collectedBananas = 0;
+    //int lives = 1;
+    private static int lives = 3;
+    private static int score;
+    private static int collectedBananas;
     float speed = 0;
 
     private GameObject player;
@@ -23,22 +25,37 @@ public class PlayerData : MonoBehaviour {
         /**
           * Calculation of speed from velocity goes here
           **/
+        if (collectedBananas >= 100)
+        {
+            modifyLives(1);
+            collectedBananas -= 100;
+        }
+        Debug.Log(collectedBananas);
         speed = rigidBody.velocity.magnitude;
     }
 
-    public int getLives()
+    public static int Lives
     {
-        return lives;
+        get
+        {
+            return lives;
+        }
     }
 
-    public int getBananas()
+    public static int Banana
     {
-        return collectedBananas;
+        get
+        {
+            return collectedBananas;
+        }
     }
 
-    public int getScore()
+    public static int Score
     {
-        return score;
+        get
+        {
+            return score;
+        }
     }
 
     public float getSpeed()

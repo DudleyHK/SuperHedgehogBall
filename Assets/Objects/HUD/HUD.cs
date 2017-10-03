@@ -9,6 +9,7 @@ public class HUD : MonoBehaviour {
     public Text score;
     public Text timer;
     public Text speed;
+    public Text lives;
     public GameObject[] livesSprites;
     float elapsed = 0;
     float time = 0;
@@ -20,6 +21,7 @@ public class HUD : MonoBehaviour {
         score.text = "S C O R E";
         timer.text = "T I M E";
         speed.text = "S P E E D";
+        lives.text = "L I V E S";
         playerData = GameObject.Find("Player").GetComponent<PlayerData>();
     }
 	
@@ -51,17 +53,18 @@ public class HUD : MonoBehaviour {
 
     void UpdateScore()
     {
-        score.text = "" + playerData.getScore().ToString("000");
-        
+        score.text = "" + PlayerData.Score.ToString();
+
     }
 
     void UpdateLives()
     {
-        if( playerData.getLives() < 3)
-        {
-            if (livesSprites[playerData.getLives()].gameObject)
-                Destroy(livesSprites[playerData.getLives()].gameObject);
-        }
+        lives.text = "X: " + PlayerData.Lives.ToString();
+        //if( PlayerData.Lives < 3)
+        //{
+        //    if (livesSprites[PlayerData.Lives].gameObject)
+        //        Destroy(livesSprites[PlayerData.Lives].gameObject);
+        //}
     }
 
     void UpdateSpeed()

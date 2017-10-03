@@ -7,6 +7,10 @@ public class BananaCollectable : MonoBehaviour
     private AudioSource source { get { return this.GetComponent<AudioSource>(); } }
     public PlayerData data;
 
+    private void Start()
+    {
+        data = GameObject.Find("Player").GetComponent<PlayerData>();
+    }
 
     public void OnTriggerEnter2D(Collider2D other)
     { 

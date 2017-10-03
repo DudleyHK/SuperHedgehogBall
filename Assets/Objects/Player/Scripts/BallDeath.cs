@@ -7,16 +7,10 @@ public class BallDeath : MonoBehaviour
     public GameObject killBox;
     public AudioClip die;
 
-
-    private PlayerData playerData;
     private AudioSource source { get { return GetComponent<AudioSource>(); } }
-
-
-
 
     private void Start()
     {
-        playerData = GameObject.Find("Player").GetComponent<PlayerData>();
     }
 
     private void OnTriggerExit2D(Collider2D other)
@@ -31,7 +25,15 @@ public class BallDeath : MonoBehaviour
 
             print("leaving kill box");
             StartCoroutine(WaitForSoundBeforeSceneChange());
-            playerData.modifyLives(-1);
+            if(PlayerData.Lives > 0)
+            {
+                PlayerData.Lives = -1;
+            }
+            else
+            {
+                LevelManager.LoadScene("GameOver");
+            }
+            
         }
     }
 

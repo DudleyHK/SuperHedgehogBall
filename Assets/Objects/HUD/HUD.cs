@@ -3,13 +3,12 @@ using System.Collections.Generic;
 using UnityEngine.UI;
 using UnityEngine;
 
-public class HUD : MonoBehaviour {
-
-    private PlayerData playerData;
+public class HUD : MonoBehaviour
+{
     public Text score;
     public Text timer;
     public Text speed;
-    public GameObject[] livesSprites;
+    public Text lives;
     float elapsed = 0;
     float time = 0;
     float miliseconds;
@@ -20,7 +19,7 @@ public class HUD : MonoBehaviour {
         score.text = "S C O R E";
         timer.text = "T I M E";
         speed.text = "S P E E D";
-        playerData = GameObject.Find("Player").GetComponent<PlayerData>();
+        lives.text = "L I V E S";
     }
 	
 	// Update is called once per frame
@@ -51,21 +50,21 @@ public class HUD : MonoBehaviour {
 
     void UpdateScore()
     {
-        score.text = "" + playerData.getScore().ToString("000");
-        
+        score.text = "" + PlayerData.Score.ToString("000");
     }
 
     void UpdateLives()
     {
-        if( playerData.getLives() < 3)
-        {
-            if (livesSprites[playerData.getLives()].gameObject)
-                Destroy(livesSprites[playerData.getLives()].gameObject);
-        }
+        lives.text = "x " + PlayerData.Lives.ToString("00");
+        //if( PlayerData.Lives < 3)
+        //{
+        //    if (livesSprites[PlayerData.Lives].gameObject)
+        //        Destroy(livesSprites[PlayerData.Lives].gameObject);
+        //}
     }
 
     void UpdateSpeed()
     {
-        speed.text = (int) playerData.getSpeed() + " mph";
+        speed.text = (int) PlayerData.Speed + " mph";
     }
 }

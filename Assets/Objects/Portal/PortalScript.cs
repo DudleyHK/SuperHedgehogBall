@@ -19,8 +19,8 @@ public class PortalScript : MonoBehaviour
     private Vector2 plaPos;
 
     private PortalScript script;
-
     private Rigidbody2D rb;
+
     private AudioSource source { get { return this.GetComponent<AudioSource>(); } }
 
 
@@ -28,6 +28,7 @@ public class PortalScript : MonoBehaviour
     void Start ()
     {
         sw1tch = true;
+        player = GameObject.Find("Player");
         rb = player.GetComponent<Rigidbody2D>();
 
     }

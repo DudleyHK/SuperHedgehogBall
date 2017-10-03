@@ -6,3 +6,6 @@ AUDIO:
 - Game Music: https://www.youtube.com/watch?v=KJrFGr8cJiQ
 - SFX: Made with http://www.superflashbros.net/as3sfxr/
 - Win Level: https://www.youtube.com/watch?v=nzjtkaLCn60
+
+PARTICLES:
+- Particle Asset Pack: https://assetstore.unity.com/packages/vfx/particles/simple-particle-pack-3045

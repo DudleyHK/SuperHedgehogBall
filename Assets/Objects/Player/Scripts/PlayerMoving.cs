@@ -10,11 +10,42 @@ public class PlayerMoving : MonoBehaviour
 
     public AudioSource source;
 
-
+    public SpriteRenderer lifeSprite;
     // Update is called once per frame
-    private void Update ()
+    private void Update()
     {
-       AnimatorStateInfo stateInfo = playerAnim.GetCurrentAnimatorStateInfo(0);
+        PlayerData.Speed = playerRigidbody.velocity.magnitude;
+        AnimationUpdate();
+        CheckBananaScore();
+    }
+
+    private void OnTriggerEnter2D(Collider2D other)
+    {
+        if (other.gameObject.name == "Banana")
+        {
+            PlayerData.Score += 1;
+            PlayerData.BananaCount += 1;
+            if (PlayerData.Score > PlayerData.HighScore)
+                PlayerData.HighScore = PlayerData.Score;
+            other.gameObject.GetComponent<BananaCollectable>().DestroyBanana();
+            //StartCoroutine(addLife());
+        }
+    }
+
+
+    private void CheckBananaScore()
+    {
+        if (PlayerData.BananaCount >= 10)
+        {
+            PlayerData.Lives++;
+            PlayerData.BananaCount -= 100;
+            StartCoroutine(addLife());
+        }
+    }
+
+    private void AnimationUpdate()
+    {
+        AnimatorStateInfo stateInfo = playerAnim.GetCurrentAnimatorStateInfo(0);
 
         if (stateInfo.IsName("Idle"))
         {
@@ -30,7 +61,7 @@ public class PlayerMoving : MonoBehaviour
         }
         else if (stateInfo.IsName("Blink"))
         {
-            if(stateInfo.normalizedTime >= 2f)
+            if (stateInfo.normalizedTime >= 2f)
             {
                 playerAnim.SetBool("Blink", false);
             }
@@ -38,39 +69,23 @@ public class PlayerMoving : MonoBehaviour
 
         if (stateInfo.IsName("Rolling"))
         {
-			// Rolliung Sound.
-            //if(!source.isPlaying)
-            //{
-            //    source.Play();
-            //}
+            if (!source.isPlaying)
+            {
+              //  source.Play();
+            }
         }
         else
         {
-            //source.Stop();
+            source.Stop();
         }
         playerAnim.SetFloat("Speed", playerRigidbody.velocity.magnitude);
-	}
+    }
+
+    IEnumerator addLife()
+    {
+        lifeSprite.enabled = true;
+        yield return new WaitForSeconds(2); //However many seconds you want
+        lifeSprite.enabled = false; //This toggles it
+    }
 }
 
-
-
-
-
- // AnimatorStateInfo stateInfo = playerAnim.GetCurrentAnimatorStateInfo(0);
-// if (!paused)
-            // {
-                // currentWaitTime = Random.Range(MIN_WAIT_TIME, MAX_WAIT_TIME);
-                // paused = true;
-            // }
-            // else
-            // {
-                // if (timer <= currentWaitTime)
-                // {
-                    // timer += Time.deltaTime;
-                // }
-                // else
-                // {
-                    // timer = 0f;
-                    // paused = false;
-                // }
-            // }

@@ -2,62 +2,75 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerData : MonoBehaviour {
+public class PlayerData : MonoBehaviour
+{
 
-    int lives = 3;
-    int score = 0;
-    int collectedBananas = 0;
-    float speed = 0;
+    //int lives = 1;
+    private static int lives = 3;
+    private static int score = 0;
+    private static int highscore = 0;
+    private static int bananaCount = 0;
+    private static float speed = 0;
 
-    private GameObject player;
-    private Rigidbody2D rigidBody;
 
-    private void Start()
+
+    public static int Lives
     {
-        player = gameObject;
-        rigidBody = player.GetComponent<Rigidbody2D>();
+        get
+        {
+            return lives;
+        }
+        set
+        {
+            lives = value;
+        }
     }
 
-    private void Update()
+    public static int HighScore
     {
-        /**
-          * Calculation of speed from velocity goes here
-          **/
-        speed = rigidBody.velocity.magnitude;
+        get
+        {
+            return highscore;
+        }
+        set
+        {
+            highscore = value;
+        }
     }
 
-    public int getLives()
+    public static int BananaCount
     {
-        return lives;
+        get
+        {
+            return bananaCount;
+        }
+        set
+        {
+            bananaCount = value;
+        }
     }
 
-    public int getBananas()
+    public static int Score
     {
-        return collectedBananas;
+        get
+        {
+            return score;
+        }
+        set
+        {
+            score = value;
+        }
     }
 
-    public int getScore()
+    public static float Speed
     {
-        return score;
-    }
-
-    public float getSpeed()
-    {
-        return speed;
-    }
-    
-    public void modifyLives(int amount)
-    {
-        lives += amount;
-    }
-
-    public void modifyScore(int amount)
-    {
-        score += amount;
-    }
-
-    public void modifyBananas(int amount)
-    {
-        collectedBananas += amount;
+        get
+        {
+            return speed;
+        }
+        set
+        {
+            speed = value;
+        }
     }
 }

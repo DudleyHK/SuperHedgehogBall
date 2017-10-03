@@ -21,7 +21,7 @@ public class PlayerMoving : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D other)
     {
-        if (other.gameObject.name == "Banana")
+        if (other.gameObject.tag == "Banana")
         {
             PlayerData.Score += 1;
             PlayerData.BananaCount += 1;

@@ -6,11 +6,11 @@ public class PlayerFalling : MonoBehaviour
 {
     public bool grounded = false;
     public AudioClip hitFloor;
+    private CameraShake camShake { get { return Camera.main.GetComponent<CameraShake>(); } }
+
+
 
     private AudioSource source { get { return GetComponent<AudioSource>(); } }
-
-
-
 
     private void OnCollisionEnter2D(Collision2D other)
     {
@@ -19,6 +19,7 @@ public class PlayerFalling : MonoBehaviour
             if (!grounded)
             {
                 grounded = true;
+                camShake.ShakeCamera(0.5f, .1f);
                 HitFloor();
             }
         }
@@ -37,6 +38,7 @@ public class PlayerFalling : MonoBehaviour
         {
             source.clip = hitFloor;
             source.PlayOneShot(hitFloor);
+
         }
         Debug.Log("Hit Floor");
     }

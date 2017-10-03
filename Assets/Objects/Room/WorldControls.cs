@@ -34,6 +34,7 @@ public class WorldControls : MonoBehaviour
 
     private void FixedUpdate()
     {
+        if (!SceneIntro.gameBegin) return;
         AddBoost();
         SpinRoom();
     }

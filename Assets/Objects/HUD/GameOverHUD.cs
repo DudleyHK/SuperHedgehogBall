@@ -19,6 +19,6 @@ public class GameOverHUD : MonoBehaviour {
 
     void setScore()
     {
-        finalScore.text = "" + PlayerData.getScore.ToString();
+        finalScore.text = "" + PlayerData.Score.ToString();
     }
 }

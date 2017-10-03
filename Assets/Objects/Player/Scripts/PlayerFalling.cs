@@ -7,6 +7,7 @@ public class PlayerFalling : MonoBehaviour
     public bool grounded = false;
     public float threshold = 5f;
     public AudioClip hitFloor;
+    public AudioClip smashFloor;
     private CameraShake camShake { get { return Camera.main.GetComponent<CameraShake>(); } }
 
 
@@ -20,7 +21,15 @@ public class PlayerFalling : MonoBehaviour
             if (!grounded)
             {
                 if(PlayerData.Speed > threshold)
+                {
                     camShake.ShakeCamera(0.5f, .1f);
+                    SmashFloor();
+                }
+                else
+                {
+                    HitFloor();
+                }
+                    
 
                 grounded = true;
                 HitFloor();
@@ -34,7 +43,16 @@ public class PlayerFalling : MonoBehaviour
         grounded = false;
     }
 
+    private void SmashFloor()
+    {
+        if (!source.isPlaying)
+        {
+            source.clip = smashFloor;
+            source.PlayOneShot(smashFloor);
 
+        }
+        Debug.Log("Smash Floor");
+    }
     private void HitFloor()
     {
         if(!source.isPlaying)

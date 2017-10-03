@@ -9,36 +9,50 @@ public class PlayerMoving : MonoBehaviour
     public float timer = 0f;
 
     public AudioSource source;
+    public AudioClip lifeGain;
 
-
-
-
+    public SpriteRenderer lifeSprite;
     // Update is called once per frame
     private void Update()
     {
         PlayerData.Speed = playerRigidbody.velocity.magnitude;
         AnimationUpdate();
-        CheckBananaScore();
     }
 
     private void OnTriggerEnter2D(Collider2D other)
     {
         if (other.gameObject.name == "Banana")
         {
-            PlayerData.Score += 10;
-            PlayerData.Bananas += 10;
+            PlayerData.Score += 1;
+            PlayerData.BananaCount += 1;
+            if (PlayerData.Score > PlayerData.HighScore)
+                PlayerData.HighScore = PlayerData.Score;
             other.gameObject.GetComponent<BananaCollectable>().DestroyBanana();
+            CheckBananaScore();
         }
     }
 
 
     private void CheckBananaScore()
     {
-        if (PlayerData.Bananas >= 100)
+        if (PlayerData.BananaCount % 10 == 0)
         {
             PlayerData.Lives++;
-            PlayerData.Bananas -= 100;
+            PlayerData.BananaCount -= 10;
+            NewLife();
         }
+    }
+
+    private void NewLife()
+    {
+        StartCoroutine(addLife());
+        if (!source.isPlaying)
+        {
+            source.clip = lifeGain;
+            source.PlayOneShot(lifeGain);
+
+        }
+        Debug.Log("Smash Floor");
     }
 
     private void AnimationUpdate()
@@ -69,7 +83,7 @@ public class PlayerMoving : MonoBehaviour
         {
             if (!source.isPlaying)
             {
-                source.Play();
+              //  source.Play();
             }
         }
         else
@@ -79,5 +93,11 @@ public class PlayerMoving : MonoBehaviour
         playerAnim.SetFloat("Speed", playerRigidbody.velocity.magnitude);
     }
 
+    IEnumerator addLife()
+    {
+        lifeSprite.enabled = true;
+        yield return new WaitForSeconds(2); //However many seconds you want
+        lifeSprite.enabled = false; //This toggles it
+    }
 }
 

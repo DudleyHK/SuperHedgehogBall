@@ -10,11 +10,19 @@ public class BounceScript : MonoBehaviour {
 	public float scale = 5f;
 	private  Rigidbody2D rigidBody2D;
 	public float bounceMagnitude = 3.0f;
+	public Sprite idleSprite; 
+	public Sprite bigSprite; 
+	private SpriteRenderer spriteRenderer; 
 
 	void Start()
 	{
 		audioSource = GetComponent<AudioSource>();
 		rigidBody2D = GameObject.Find("Player").GetComponent<Rigidbody2D>();
+		spriteRenderer = this.GetComponent<SpriteRenderer>(); 
+		if (spriteRenderer.sprite == null)
+		{
+		//	spriteRenderer.sprite = idleSprite; 
+		}
 	}
 
 	void OnCollisionEnter2D(Collision2D col)
@@ -32,6 +40,7 @@ public class BounceScript : MonoBehaviour {
 	{
 		if (big)
 		{
+			spriteRenderer.sprite = bigSprite;
 			if (timer <= 0.3f)
 			{
 				timer += Time.deltaTime;
@@ -40,12 +49,16 @@ public class BounceScript : MonoBehaviour {
 					rigidBody2D.velocity += rigidBody2D.velocity.normalized;
 				}
 			} 
-			else
+			else 
 			{
 				timer = 0f;
 				transform.localScale -= new Vector3 (scale, scale, scale);
 				big = false;
 			}
+		}
+		else
+		{
+			spriteRenderer.sprite = idleSprite;
 		}
 	}
 }

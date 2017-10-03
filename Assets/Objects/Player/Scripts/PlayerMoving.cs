@@ -10,9 +10,7 @@ public class PlayerMoving : MonoBehaviour
 
     public AudioSource source;
 
-
-
-
+    public SpriteRenderer lifeSprite;
     // Update is called once per frame
     private void Update()
     {
@@ -28,6 +26,7 @@ public class PlayerMoving : MonoBehaviour
             PlayerData.Score += 10;
             PlayerData.Bananas += 10;
             other.gameObject.GetComponent<BananaCollectable>().DestroyBanana();
+            //StartCoroutine(addLife());
         }
     }
 
@@ -38,6 +37,7 @@ public class PlayerMoving : MonoBehaviour
         {
             PlayerData.Lives++;
             PlayerData.Bananas -= 100;
+            StartCoroutine(addLife());
         }
     }
 
@@ -79,5 +79,11 @@ public class PlayerMoving : MonoBehaviour
         playerAnim.SetFloat("Speed", playerRigidbody.velocity.magnitude);
     }
 
+    IEnumerator addLife()
+    {
+        lifeSprite.enabled = true;
+        yield return new WaitForSeconds(2); //However many seconds you want
+        lifeSprite.enabled = false; //This toggles it
+    }
 }
 

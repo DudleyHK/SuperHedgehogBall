@@ -5,7 +5,6 @@ using UnityEngine;
 public class BananaCollectable : MonoBehaviour
 {
     private AudioSource source { get { return this.GetComponent<AudioSource>(); } }
-    private PlayerData data { get { return GetComponentInChildren<PlayerData>(); } }
 
     public void DestroyBanana()
     {

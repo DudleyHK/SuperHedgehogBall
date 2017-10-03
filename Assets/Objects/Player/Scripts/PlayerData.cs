@@ -9,30 +9,9 @@ public class PlayerData : MonoBehaviour
     private static int lives = 3;
     private static int score;
     private static int collectedBananas;
-    float speed = 0;
+    private static float speed = 0;
 
-    private GameObject player;
-    private Rigidbody2D rigidBody;
 
-    private void Start()
-    {
-        player = gameObject;
-        rigidBody = player.GetComponent<Rigidbody2D>();
-    }
-
-    private void Update()
-    {
-        /**
-          * Calculation of speed from velocity goes here
-          **/
-        if (collectedBananas >= 100)
-        {
-            modifyLives(1);
-            collectedBananas -= 100;
-        }
-        Debug.Log(collectedBananas);
-        speed = rigidBody.velocity.magnitude;
-    }
 
     public static int Lives
     {
@@ -40,13 +19,21 @@ public class PlayerData : MonoBehaviour
         {
             return lives;
         }
+        set
+        {
+            lives = value;
+        }
     }
 
-    public static int Banana
+    public static int Bananas
     {
         get
         {
             return collectedBananas;
+        }
+        set
+        {
+            collectedBananas = value;
         }
     }
 
@@ -56,11 +43,22 @@ public class PlayerData : MonoBehaviour
         {
             return score;
         }
+        set
+        {
+            score = value;
+        }
     }
 
-    public float getSpeed()
+    public static float Speed
     {
-        return speed;
+        get
+        {
+            return speed;
+        }
+        set
+        {
+            speed = value;
+        }
     }
     
     public void modifyLives(int amount)

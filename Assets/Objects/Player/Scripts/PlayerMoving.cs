@@ -23,8 +23,8 @@ public class PlayerMoving : MonoBehaviour
     {
         if (other.gameObject.tag == "Banana")
         {
-            PlayerData.Score += 1;
-            PlayerData.BananaCount += 1;
+            PlayerData.Score += 10;
+            PlayerData.BananaCount += 10;
             if (PlayerData.Score > PlayerData.HighScore)
                 PlayerData.HighScore = PlayerData.Score;
             other.gameObject.GetComponent<BananaCollectable>().DestroyBanana();
@@ -35,10 +35,17 @@ public class PlayerMoving : MonoBehaviour
 
     private void CheckBananaScore()
     {
+<<<<<<< HEAD
         if (PlayerData.BananaCount % 25 == 0)
         {
             PlayerData.Lives++;
             PlayerData.BananaCount -= 25;
+=======
+        if (PlayerData.BananaCount % 100 == 0)
+        {
+            PlayerData.Lives++;
+            PlayerData.BananaCount -= 100;
+>>>>>>> ebc76f25777d443fb8682f4ec57bca0dd445934d
             NewLife();
         }
     }

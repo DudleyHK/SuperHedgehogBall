@@ -1,11 +1,12 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Goal : MonoBehaviour {
 
     public HUD hud;
-    public WorldControls room;
+    //public WorldControls room;
     public float finalTime;
     public float endRotSpeed = 500;
 
@@ -27,11 +28,15 @@ public class Goal : MonoBehaviour {
 	void Update () {
 		if(ended)
         {
-            room.transform.RotateAround(player.transform.position, Vector3.forward, Time.deltaTime * endRotSpeed);
+            this.transform.parent.transform.RotateAround(player.transform.position, Vector3.forward, Time.deltaTime * endRotSpeed);
+            //room.transform.RotateAround(player.transform.position, Vector3.forward, Time.deltaTime * endRotSpeed);
             endTimer += Time.deltaTime;
             if(endTimer >= fullEndTime)
             {
-                LevelManager.LoadScene("LevelOne");
+                hud.transform.GetChild(7).GetChild(3).GetComponent<Text>().text = finalTime.ToString();
+                if (hud.transform.GetChild(7).GetComponent<RectTransform>().anchoredPosition.y < 0)
+                hud.transform.GetChild(7).GetComponent<RectTransform>().anchoredPosition = new Vector2(hud.transform.GetChild(7).GetComponent<RectTransform>().anchoredPosition.x, 
+                    hud.transform.GetChild(7).GetComponent<RectTransform>().anchoredPosition.y + 5);
                 Debug.Log("Level Complete");
             }
 

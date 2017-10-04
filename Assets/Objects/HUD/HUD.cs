@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine.UI;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class HUD : MonoBehaviour
 {
@@ -72,4 +73,15 @@ public class HUD : MonoBehaviour
     {
         return elapsed;
     }
+
+    public void nextLevel()
+    {
+        LevelManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+    }
+
+    public void backToMenu()
+    {
+        LevelManager.LoadScene("MainMenu");
+    }
+
 }

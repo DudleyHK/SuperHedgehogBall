@@ -13,6 +13,11 @@ public class LevelManager : ScriptableObject
     public static void ResetScene(string name) 
     {
         LoadScene(name);
+
+        // Fire off event here. Instead hack it in..
+        PlayerData.BananaCount = 0;
+        PlayerData.Score = 0;
+        PlayerData.Lives = 3;
     }
     public static void LoadScene(string name)
     {

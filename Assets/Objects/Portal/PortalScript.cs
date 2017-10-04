@@ -10,7 +10,7 @@ public class PortalScript : MonoBehaviour
     public GameObject spawn;
     public PortalScript twin;
 
-    private float speed = 1000.0f;
+    private float speed = 250.0f;
 
     public bool sw1tch;
 

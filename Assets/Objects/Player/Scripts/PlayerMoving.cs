@@ -35,10 +35,10 @@ public class PlayerMoving : MonoBehaviour
 
     private void CheckBananaScore()
     {
-        if (PlayerData.BananaCount % 10 == 0)
+        if (PlayerData.BananaCount % 25 == 0)
         {
             PlayerData.Lives++;
-            PlayerData.BananaCount -= 10;
+            PlayerData.BananaCount -= 25;
             NewLife();
         }
     }
@@ -96,7 +96,7 @@ public class PlayerMoving : MonoBehaviour
     IEnumerator addLife()
     {
         lifeSprite.enabled = true;
-        yield return new WaitForSeconds(2); //However many seconds you want
+        yield return new WaitForSeconds(1); //However many seconds you want
         lifeSprite.enabled = false; //This toggles it
     }
 }

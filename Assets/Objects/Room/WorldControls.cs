@@ -61,6 +61,10 @@ public class WorldControls : MonoBehaviour
                 currentSpinVelocity = currentMaxSpinVelocity;
             }
         }
+        else if(Input.GetButtonDown("Fire2"))
+        {
+            LevelManager.LoadScene("LevelSelector");
+        }
         else if (Input.GetAxis("Horizontal") > 0)
         {
             if(currentSpinVelocity > 0)

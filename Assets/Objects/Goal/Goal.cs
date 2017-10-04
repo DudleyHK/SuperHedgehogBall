@@ -33,10 +33,10 @@ public class Goal : MonoBehaviour {
             endTimer += Time.deltaTime;
             if(endTimer >= fullEndTime)
             {
-                hud.transform.GetChild(7).GetChild(3).GetComponent<Text>().text = finalTime.ToString();
-                if (hud.transform.GetChild(7).GetComponent<RectTransform>().anchoredPosition.y < 0)
-                hud.transform.GetChild(7).GetComponent<RectTransform>().anchoredPosition = new Vector2(hud.transform.GetChild(7).GetComponent<RectTransform>().anchoredPosition.x, 
-                    hud.transform.GetChild(7).GetComponent<RectTransform>().anchoredPosition.y + 5);
+                hud.transform.GetChild(6).GetChild(3).GetComponent<Text>().text = finalTime.ToString();
+                if (hud.transform.GetChild(6).GetComponent<RectTransform>().anchoredPosition.y < 0)
+                hud.transform.GetChild(6).GetComponent<RectTransform>().anchoredPosition = new Vector2(hud.transform.GetChild(6).GetComponent<RectTransform>().anchoredPosition.x, 
+                    hud.transform.GetChild(6).GetComponent<RectTransform>().anchoredPosition.y + 5);
                 Debug.Log("Level Complete");
             }
 

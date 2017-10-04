@@ -35,17 +35,12 @@ public class PlayerMoving : MonoBehaviour
 
     private void CheckBananaScore()
     {
-<<<<<<< HEAD
+
         if (PlayerData.BananaCount % 25 == 0)
         {
             PlayerData.Lives++;
             PlayerData.BananaCount -= 25;
-=======
-        if (PlayerData.BananaCount % 100 == 0)
-        {
-            PlayerData.Lives++;
-            PlayerData.BananaCount -= 100;
->>>>>>> ebc76f25777d443fb8682f4ec57bca0dd445934d
+
             NewLife();
         }
     }

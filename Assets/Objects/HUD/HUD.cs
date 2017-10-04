@@ -71,7 +71,7 @@ public class HUD : MonoBehaviour
 
     public float getElapsed()
     {
-        return elapsed;
+        return time;
     }
 
     public void nextLevel()
